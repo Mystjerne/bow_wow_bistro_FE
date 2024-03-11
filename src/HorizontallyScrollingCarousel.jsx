@@ -62,8 +62,8 @@ const HorizontalScrollingCarousel = () => {
         gridAutoColumns: "minmax(160px, 1fr)",
       }}
     >
-      {images.map((image) => (
-        <ImageListItem>
+      {images.map((image, index) => (
+        <ImageListItem key={index}>
           <img src={image.thumbnail.uri} />
           <ImageListItemBar title={image.thumbnail.name} />
         </ImageListItem>

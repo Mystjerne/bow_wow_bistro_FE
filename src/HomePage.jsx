@@ -2,16 +2,11 @@ import React from "react";
 
 import { Outlet, Link, useNavigate, Navigate } from "react-router-dom";
 import HorizontalScrollingCarousel from "./HorizontallyScrollingCarousel";
+import MealTile from "./MealTile";
 
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Container,
-  Link as MuiLink,
-  Box,
-  Icon,
-} from "@mui/material";
+import { Typography, Container, Link as MuiLink, Box } from "@mui/material";
+import NavBar from "./NavBar";
+import OrderPage from "./OrderPage";
 
 /*
 <AppBar position="static"></AppBar>
@@ -20,29 +15,11 @@ import {
 function HomePage() {
   return (
     <div>
-      <Toolbar>
-        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-          <img src="../main-logo-black-transparent.png" id="fixedSizeImage" />
-        </Typography>
-
-        <MuiLink color="inherit" sx={{ marginRight: 2 }}>
-          {/* //Make this scroll down to the About Us section of the HomePage when
-          clicked. */}
-        </MuiLink>
-        <MuiLink color="inherit" sx={{ marginRight: 2 }}>
-          <Link to="/order">Order</Link>
-        </MuiLink>
-        <MuiLink color="inherit" sx={{ marginRight: 2 }}>
-          <Link to="/login">Login</Link>
-        </MuiLink>
-        <MuiLink color="inherit">
-          <Link to="/signup">Sign Up</Link>
-        </MuiLink>
-      </Toolbar>
+      <NavBar />
 
       <HorizontalScrollingCarousel />
 
-      <Box sx={{ bgcolor: "pink", p: 2 }}>
+      <Box className="pink-bar">
         <Container>
           <Typography variant="h3" gutterBottom>
             About Us
@@ -58,6 +35,8 @@ function HomePage() {
           </Typography>
         </Container>
       </Box>
+
+      <OrderPage />
     </div>
   );
 }
