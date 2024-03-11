@@ -14,6 +14,11 @@
   -webkit-text-size-adjust: 100%;
 }
 
+/* #fixedSizeImage {
+  width: 200px;
+  height: 200px;
+} */
+/* 
 a {
   font-weight: 500;
   color: #646cff;
@@ -66,4 +71,4 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
-}
+} */

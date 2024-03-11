@@ -1,16 +1,11 @@
 import React from "react";
 import { AppBar, Toolbar, Typography, Container, Link } from "@mui/material";
-import HomePage from "./HomePage";
 /*
 <AppBar position="static"></AppBar>
 */
 
-function App() {
-  return (
-    <div>
-      <HomePage />
-    </div>
-  );
+function NavBar() {
+  return <div></div>;
 }
 
-export default App;
+export default NavBar;

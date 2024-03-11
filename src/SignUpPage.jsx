@@ -1,16 +1,15 @@
 import React from "react";
 import { AppBar, Toolbar, Typography, Container, Link } from "@mui/material";
-import HomePage from "./HomePage";
 /*
 <AppBar position="static"></AppBar>
 */
 
-function App() {
+function SignUpPage() {
   return (
     <div>
-      <HomePage />
+      <h1>This is the SIGNUP page.</h1>
     </div>
   );
 }
 
-export default App;
+export default SignUpPage;
