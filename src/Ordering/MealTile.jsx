@@ -22,7 +22,6 @@ export default function MealTile({
   return (
     <Card className="card" sx={{ maxWidth: 345, padding: 2, margin: 3 }}>
       <CardMedia sx={{ height: 140 }} image={meal_img_path} title="Meal" />
-      {/* //The p stands for padding. How to make the padding white? */}
       <CardContent>
         <Typography
           gutterBottom
@@ -38,7 +37,6 @@ export default function MealTile({
       </CardContent>
 
       <CardActions>
-        {/* Make the buttons circular */}
         <Button size="small">
           <EditNoteRoundedIcon />
         </Button>

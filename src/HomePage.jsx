@@ -2,17 +2,36 @@ import React from "react";
 
 import { Outlet, Link, useNavigate, Navigate } from "react-router-dom";
 import HorizontalScrollingCarousel from "./HorizontallyScrollingCarousel";
-import MealTile from "./MealTile";
 
 import { Typography, Container, Link as MuiLink, Box } from "@mui/material";
 import NavBar from "./NavBar";
-import OrderPage from "./OrderPage";
+import OrderPage from "./Ordering/OrderPage";
+
+import { Button } from "@mui/material";
+import { useEffect } from "react";
+import axios from "axios";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useUser } from "./Context/UserContext";
 
 /*
 <AppBar position="static"></AppBar>
 */
 
 function HomePage() {
+  const { isAuthenticated, user, loginWithRedirect } = useAuth0();
+
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      console.log("email - ", user.email);
+      console.log("image - ", user.picture);
+      console.log("user first name - ", user.given_name);
+      console.log("user data", user);
+    }
+  }, [isAuthenticated, user]);
+
+  //If the user is already logged in and clicks on this page, redirect them to the OrderPage.
+  //Include a button which will redirect the user to the login page just in case they already have an account.
+
   return (
     <div>
       <NavBar />
