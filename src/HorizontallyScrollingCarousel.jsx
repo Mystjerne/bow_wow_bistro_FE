@@ -28,13 +28,10 @@ const images = [
   { thumbnail: { uri: "../public/stock_dog_food.jpg", name: "dog_food" } },
   { thumbnail: { uri: "../public/stock_dog_food.jpg", name: "dog_food" } },
   { thumbnail: { uri: "../public/stock_dog_food.jpg", name: "dog_food" } },
-  { thumbnail: { uri: "https://lorempixel.com/200/200/city", name: "city" } },
-  {
-    thumbnail: { uri: "https://lorempixel.com/200/200/nature", name: "nature" },
-  },
-  { thumbnail: { uri: "https://lorempixel.com/200/200/cats", name: "cats" } },
-  { thumbnail: { uri: "https://lorempixel.com/200/200/cats", name: "cats" } },
-  { thumbnail: { uri: "https://lorempixel.com/200/200/cats", name: "cats" } },
+  { thumbnail: { uri: "../public/stock_dog_food.jpg", name: "dog_food" } },
+  { thumbnail: { uri: "../public/stock_dog_food.jpg", name: "dog_food" } },
+  { thumbnail: { uri: "../public/stock_dog_food.jpg", name: "dog_food" } },
+  { thumbnail: { uri: "../public/stock_dog_food.jpg", name: "dog_food" } },
 ];
 
 const HorizontalScrollingCarousel = () => {

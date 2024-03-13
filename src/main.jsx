@@ -2,10 +2,13 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
 import "./index.css";
+
+import { UserProvider } from "./Context/UserContext.jsx";
+import { Auth0Provider } from "@auth0/auth0-react";
+
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import HomePage from "./HomePage.jsx";
-import OrderPage from "./OrderPage.jsx";
-import SignUpPage from "./SignUpPage.jsx";
+import OrderPage from "./Ordering/OrderPage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -26,18 +29,18 @@ const router = createBrowserRouter([
     path: "/order",
     element: <OrderPage />,
   },
-  {
-    path: "/signup",
-    element: <SignUpPage />,
-  },
-  {
-    path: "/login",
-    element: <SignUpPage />,
-  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+  <Auth0Provider
+    domain={import.meta.env.VITE_SOME_AUTH0_DOMAIN}
+    clientId={import.meta.env.VITE_SOME_AUTH0_CLIENTID}
+    authorizationParams={{
+      redirect_uri: import.meta.env.VITE_SOME_AUTH0_REDIRECTURL,
+    }}
+  >
+    <UserProvider>
+      <RouterProvider router={router} />
+    </UserProvider>
+  </Auth0Provider>
 );
