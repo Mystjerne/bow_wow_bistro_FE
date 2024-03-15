@@ -29,12 +29,6 @@ function CartModal({ modaltitle, modaldescription, open, setOpen }) {
     setOpen(false);
   };
 
-  useEffect(() => {
-    //When the modal is opened, use the userid from the userContext to get the cart details for the specific user.
-
-    axios.get();
-  }, []);
-
   return (
     <div>
       {isAuthenticated && user ? (
@@ -64,24 +58,3 @@ function CartModal({ modaltitle, modaldescription, open, setOpen }) {
 }
 
 export default CartModal;
-
-/*
-  useEffect(() => {
-    //get the cart of the user but only if they actually exist
-    if (isAuthenticated && user) {
-      axios
-        .post(`${import.meta.env.VITE_SOME_BACKEND_USER_URL + "/check"}`, {
-          email: user.email,
-        })
-        .then((response) => {
-          const user_data = response.data;
-
-          console.log(user_data);
-        })
-        .catch((error) => {
-          console.error("error with checking user email:", error);
-        });
-    }
-  }, [open]);
-
-*/

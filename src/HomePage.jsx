@@ -18,19 +18,8 @@ import { useUser } from "./Context/UserContext";
 */
 
 function HomePage() {
-  const { isAuthenticated, user, loginWithRedirect } = useAuth0();
-
-  useEffect(() => {
-    if (isAuthenticated && user) {
-      console.log("email - ", user.email);
-      console.log("image - ", user.picture);
-      console.log("user first name - ", user.given_name);
-      console.log("user data", user);
-    }
-  }, [isAuthenticated, user]);
-
-  //If the user is already logged in and clicks on this page, redirect them to the OrderPage.
-  //Include a button which will redirect the user to the login page just in case they already have an account.
+  const { isAuthenticated, user, loginWithRedirect, getAccessTokenSilently } =
+    useAuth0();
 
   return (
     <div>
@@ -54,10 +43,26 @@ function HomePage() {
           </Typography>
         </Container>
       </Box>
-
-      <OrderPage />
     </div>
   );
 }
 
 export default HomePage;
+// useEffect(() => {
+//   if (isAuthenticated && user) {
+//     console.log("email - ", user.email);
+//     console.log("image - ", user.picture);
+//     console.log("user first name - ", user.given_name);
+//     console.log("user data", user);
+//   }
+// }, [isAuthenticated, user]);
+
+// const  fetchData = async () => {
+//   try {
+//     const accessToken = await getAccessTokenSilently({
+//       authorizationParams: {
+//         audience: `https://${domain}/api/v2/`,
+//         scope: "read:current_user",
+//       },
+//     });
+// }
