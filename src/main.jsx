@@ -37,6 +37,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     clientId={import.meta.env.VITE_SOME_AUTH0_CLIENTID}
     authorizationParams={{
       redirect_uri: import.meta.env.VITE_SOME_AUTH0_REDIRECTURL,
+      audience: import.meta.env.VITE_SOME_AUTH0_AUDIENCE,
+      scope:
+        "read:current_user update:current_user_metadata openid profile email",
     }}
   >
     <UserProvider>
