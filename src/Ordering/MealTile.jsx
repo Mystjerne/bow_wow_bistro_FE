@@ -12,8 +12,7 @@ import EditNoteRoundedIcon from "@mui/icons-material/EditNoteRounded";
 import axios from "axios";
 import { UserProvider, useUser } from "../Context/UserContext";
 import { useAuth0 } from "@auth0/auth0-react";
-import IngredientSubModal from "../IngredientSubModal";
-import { UNSAFE_DataRouterStateContext } from "react-router-dom";
+import IngredientSubModal from "./IngredientSubModal";
 
 export default function MealTile({
   meal_id,
@@ -94,7 +93,7 @@ export default function MealTile({
           <Button size="small">
             <EditNoteRoundedIcon
               onClick={() => {
-                openIngredientSubModal(true);
+                setOpenIngredientSubModal(true);
               }}
             />
           </Button>
@@ -108,14 +107,16 @@ export default function MealTile({
       <IngredientSubModal
         modaltitle={"Ingredient Subtitution"}
         modaldescription={
-          "Don't like the sound of an ingredient? Change it up!"
+          "Click on an ingredient you don't want, select an alternative ingredient, then click the Swap icon to switch them. When you're done, click the Add icon!"
         }
         open={openIngredientSubModal}
         setOpen={setOpenIngredientSubModal}
         //Only let the ingredientSubModal open if it was authenticated?
         meal_name={meal_name}
         meal_id={meal_id}
+        meal_photo={meal_img_path}
         meal_base_price={meal_base_price}
+        meal_description={meal_description}
       />
     </>
   );

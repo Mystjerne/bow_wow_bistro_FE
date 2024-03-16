@@ -118,9 +118,7 @@ function NavBar() {
         underline="hover"
         variant="button"
         sx={{ marginRight: 2 }}
-        onClick={() => {
-          handleCartIconClick;
-        }}
+        onClick={handleCartIconClick}
       >
         <ShoppingCartIcon />
       </MuiLink>

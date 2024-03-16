@@ -19,6 +19,7 @@ const style = {
   display: "flex",
   flexDirection: "column",
   justifyContent: "space-between",
+  color: "black",
 };
 
 function CartModal({ modaltitle, modaldescription, open, setOpen }) {
