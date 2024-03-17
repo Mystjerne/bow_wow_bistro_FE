@@ -12,10 +12,14 @@ import { useAuth0 } from "@auth0/auth0-react";
 import SwapHorizOutlinedIcon from "@mui/icons-material/SwapHorizOutlined";
 import axios from "axios";
 
-function MeatIngredientMenu({ selectedSubIngred, setSelectedSubIngred }) {
+function MeatIngredientMenu({
+  selectedSubIngred,
+  setSelectedSubIngred,
+  meatIngredients,
+  setMeatIngredients,
+}) {
   const { isAuthenticated, user, loginWithRedirect, getAccessTokenSilently } =
     useAuth0();
-  const [meatIngredients, setMeatIngredients] = useState([]);
 
   //Make an axios get request to get a list of all the ingredients which have meat.
   useEffect(() => {
@@ -52,11 +56,11 @@ function MeatIngredientMenu({ selectedSubIngred, setSelectedSubIngred }) {
 
   var ingredient_buttons = meatIngredients.map((ingredient, index) => {
     return (
-      <Grid item xs={12} key={index}>
-        <ToggleButton key={index} value={ingredient.ingredientName}>
-          {ingredient.ingredientName}
-        </ToggleButton>
-      </Grid>
+      // <Grid item xs={12} key={index}>
+      <ToggleButton key={index} value={ingredient.ingredientName}>
+        {ingredient.ingredientName}
+      </ToggleButton>
+      // </Grid>
     );
   });
 
@@ -71,6 +75,7 @@ function MeatIngredientMenu({ selectedSubIngred, setSelectedSubIngred }) {
         <ToggleButtonGroup
           exclusive
           onChange={handleSubIngredChange}
+          value={selectedSubIngred}
           orientation="vertical"
         >
           {ingredient_buttons}
