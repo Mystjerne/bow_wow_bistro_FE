@@ -20,6 +20,7 @@ export default function MealTile({
   meal_name,
   meal_description,
   meal_base_price,
+  AllIngredients,
 }) {
   const { userID } = useUser();
   const { isAuthenticated, user, loginWithRedirect, getAccessTokenSilently } =
@@ -117,6 +118,7 @@ export default function MealTile({
         meal_photo={meal_img_path}
         meal_base_price={meal_base_price}
         meal_description={meal_description}
+        AllIngredients={AllIngredients}
       />
     </>
   );

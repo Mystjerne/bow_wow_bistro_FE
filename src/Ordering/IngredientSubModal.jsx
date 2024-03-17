@@ -49,6 +49,7 @@ function IngredientSubModal({
   meal_base_price,
   meal_photo,
   meal_description,
+  AllIngredients,
 }) {
   const { isAuthenticated, user, loginWithRedirect, getAccessTokenSilently } =
     useAuth0();
@@ -58,10 +59,11 @@ function IngredientSubModal({
   };
 
   const { userID } = useUser();
-
+  const [meatIngredients, setMeatIngredients] = useState([]);
   const [mealingredients, setMealIngredients] = useState([]);
   const [selectedCurrentIngred, setSelectedCurrIngred] = useState("");
   const [selectedSubIngred, setSelectedSubIngred] = useState("");
+  const [ingredCategory, setIngredCategory] = useState("");
 
   const handleAddClicked = async () => {
     //Make a post request to the meal, adding the meal to the meals list.
@@ -157,71 +159,112 @@ function IngredientSubModal({
   //made it so that I only need to send the names instead.
 
   const handleSwapIngredients = () => {
-    //make axios request to updateMealIngredients?
-    const swapMealIngredients = async () => {
-      console.log("swapMealIngredients called");
+    // Previous Swap Ingredients function body
 
-      if (!isAuthenticated) {
-        loginWithRedirect();
-      } else if (user && isAuthenticated) {
-        //User is authenticated. need an access token for the protected axios request.
-        const accessToken = await getAccessTokenSilently({
-          audience: "https://project-4/api",
-          scope:
-            "read:current_user update:current_user_metadata openid profile email",
-        });
-        //need to post alongside the mealid of the specific meal.
+    // make axios request to updateMealIngredients?
+    // const swapMealIngredients = async () => {
+    //   console.log("swapMealIngredients called");
 
-        //The meal id in this params needs to be of the newly created meal entry that's unique to the user, not the actual original meal id
+    //   if (!isAuthenticated) {
+    //     loginWithRedirect();
+    //   } else if (user && isAuthenticated) {
+    //     //User is authenticated. need an access token for the protected axios request.
+    //     const accessToken = await getAccessTokenSilently({
+    //       audience: "https://project-4/api",
+    //       scope:
+    //         "read:current_user update:current_user_metadata openid profile email",
+    //     });
+    //     //need to post alongside the mealid of the specific meal.
 
-        axios
-          .put(
-            `${
-              import.meta.env.VITE_SOME_BACKEND_MEAL_URL +
-              "/" +
-              meal_id +
-              "sub-meal-ingredient"
-            }`,
-            {
-              old_ingredient: selectedCurrentIngred,
-              new_ingredient: selectedSubIngred,
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-              },
-            }
-          )
-          .then((response) => {
-            console.log("i am response.data", response.data);
-            //should the updateMealIngredient backend function return a list of the current meal's ingredients after the swap?
-          })
-          .catch((error) => {
-            console.error("Error adding meal to cart:", error);
-          });
-      }
-    };
+    //     //The meal id in this params needs to be of the newly created meal entry that's unique to the user, not the actual original meal id
 
-    swapMealIngredients();
+    //     axios
+    //       .put(
+    //         `${
+    //           import.meta.env.VITE_SOME_BACKEND_MEAL_URL +
+    //           "/" +
+    //           meal_id +
+    //           "sub-meal-ingredient"
+    //         }`,
+    //         {
+    //           old_ingredient: selectedCurrentIngred,
+    //           new_ingredient: selectedSubIngred,
+    //         },
+    //         {
+    //           headers: {
+    //             Authorization: `Bearer ${accessToken}`,
+    //           },
+    //         }
+    //       )
+    //       .then((response) => {
+    //         console.log("i am response.data", response.data);
+    //         //should the updateMealIngredient backend function return a list of the current meal's ingredients after the swap?
+    //       })
+    //       .catch((error) => {
+    //         console.error("Error adding meal to cart:", error);
+    //       });
+    //   }
+    // };
+
+    // swapMealIngredients();
+
+    var ingredient_to_be_removed = mealingredients.find(
+      (element) => element.ingredientName === selectedCurrentIngred
+    );
+
+    var index_of_ingred_to_be_removed = mealingredients.indexOf(
+      ingredient_to_be_removed
+    );
+
+    var ingredient_to_be_added = AllIngredients.find(
+      (element) => element.ingredientName === selectedSubIngred
+    ); //selected sub ingredeitn
+    //need to put in selected sub ingredient. in the "".
+    console.log(index_of_ingred_to_be_removed, 1, ingredient_to_be_added);
+    //toSpliced returns a new array with the elements removed/replaced.
+
+    //thats crazy
+    //Bug: when the swap button is spammed, the index_of_ingred_to_be_removed becomes negative and starts taking out ingredients from the BACK of the array instead.
+
+    //fix: index_of_ingred_to_be_removed is negative, don't run the function?
+
+    if (index_of_ingred_to_be_removed < 0) {
+      console.log("ingredient you are trying to remove does not exist lkmao");
+      return;
+    }
+
+    var newMealIngredients = mealingredients.toSpliced(
+      index_of_ingred_to_be_removed,
+      1,
+      ingredient_to_be_added
+    );
+
+    setMealIngredients(newMealIngredients);
   };
 
   var current_ingred_buttons = mealingredients.map((ingredient, index) => {
     return (
-      <Grid item xs={12} key={index}>
-        <ToggleButton
-          key={index}
-          value={ingredient.ingredientName}
-          //sx={{ margin: 2 }}
-        >
-          {ingredient.ingredientName}
-        </ToggleButton>
-      </Grid>
+      // <Grid item xs={12} key={index}>
+      <ToggleButton
+        key={index}
+        value={ingredient.ingredientName}
+        category={ingredient.category}
+        //sx={{ margin: 2 }}
+      >
+        {ingredient.ingredientName} : $ {ingredient.additionalPrice}
+      </ToggleButton>
+      // </Grid>
     );
   });
 
   const handleCurrentIngredChange = (e) => {
     setSelectedCurrIngred(e.target.value);
-    console.log(e.target.value);
+
+    var ingredient_to_be_removed = mealingredients.find(
+      (element) => element.ingredientName === e.target.value
+    );
+
+    setIngredCategory(ingredient_to_be_removed.category);
   };
 
   useEffect(() => {
@@ -266,7 +309,7 @@ function IngredientSubModal({
             <Grid xs={5} textAlign={"center"}>
               <ToggleButtonGroup
                 exclusive
-                //value={selectedCurrentIngred}
+                value={selectedCurrentIngred}
                 onChange={handleCurrentIngredChange}
                 orientation="vertical"
               >
@@ -282,8 +325,10 @@ function IngredientSubModal({
 
             <Grid item xs={5} textAlign={"center"}>
               <MeatIngredientMenu
-                selectedSubIngred={selectedCurrentIngred}
+                selectedSubIngred={selectedSubIngred}
                 setSelectedSubIngred={setSelectedSubIngred}
+                meatIngredients={meatIngredients}
+                setMeatIngredients={setMeatIngredients}
               />
             </Grid>
           </Grid>
