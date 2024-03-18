@@ -1,16 +1,9 @@
-import React from "react";
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Container,
-  Link,
-  Grid,
-} from "@mui/material";
+import { Grid } from "@mui/material";
 import MealTile from "./MealTile";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
+import NavBar from "../NavBar";
 
 function OrderPage() {
   //Make a get request to the backend for all the meals.
@@ -81,13 +74,12 @@ function OrderPage() {
 
   return (
     <div>
-      <h1>
-        {isAuthenticated ? (
-          <Grid container spacing={0}>
-            {allmealtiles}
-          </Grid>
-        ) : null}
-      </h1>
+      <NavBar />
+      {isAuthenticated ? (
+        <Grid container spacing={0}>
+          {allmealtiles}
+        </Grid>
+      ) : null}
     </div>
   );
 }
