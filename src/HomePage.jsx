@@ -1,26 +1,19 @@
-import React from "react";
-
-import { Outlet, Link, useNavigate, Navigate } from "react-router-dom";
 import HorizontalScrollingCarousel from "./HorizontallyScrollingCarousel";
 
-import { Typography, Container, Link as MuiLink, Box } from "@mui/material";
+import {
+  Typography,
+  Container,
+  Link as MuiLink,
+  Box,
+  Grid,
+} from "@mui/material";
 import NavBar from "./NavBar";
-import OrderPage from "./Ordering/OrderPage";
 
-import { Button } from "@mui/material";
-import { useEffect } from "react";
-import axios from "axios";
-import { useAuth0 } from "@auth0/auth0-react";
-import { useUser } from "./Context/UserContext";
-
-/*
-<AppBar position="static"></AppBar>
-*/
+import PetsRoundedIcon from "@mui/icons-material/PetsRounded";
+import SetMealRoundedIcon from "@mui/icons-material/SetMealRounded";
+import EggRoundedIcon from "@mui/icons-material/EggRounded";
 
 function HomePage() {
-  const { isAuthenticated, user, loginWithRedirect, getAccessTokenSilently } =
-    useAuth0();
-
   return (
     <div>
       <NavBar />
@@ -33,14 +26,162 @@ function HomePage() {
             About Us
           </Typography>
           <Typography variant="body1">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat. Duis aute irure dolor in
-            reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-            pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-            culpa qui officia deserunt mollit anim id est laborum.
+            Welcome to our dog-friendly restaurant in Singapore, where every
+            dish reflects our love for dogs. Inspired by our furry friend
+            Darcie, we craft wholesome meals tailored to their unique needs.
+            Join us in celebrating the joy of canine companionship and good
+            food, one wagging tail at a time. Welcome to our dog-loving
+            community!
           </Typography>
+        </Container>
+      </Box>
+
+      <Box margin={4}>
+        <Container>
+          <Grid container className="blackText">
+            <Grid item xs={4} textAlign={"center"}>
+              <PetsRoundedIcon />
+            </Grid>
+            <Grid item xs={4} textAlign={"center"}>
+              <SetMealRoundedIcon />
+            </Grid>
+            <Grid item xs={4} textAlign={"center"}>
+              <EggRoundedIcon />
+            </Grid>
+          </Grid>
+          <Grid container className="blackText">
+            <Grid item xs={4} textAlign={"center"}>
+              Treat Your Best Friend
+            </Grid>
+            <Grid item xs={4} textAlign={"center"}>
+              Allergy Friendly
+            </Grid>
+            <Grid item xs={4} textAlign={"center"}>
+              All Natural
+            </Grid>
+          </Grid>
+
+          <Grid container className="blackText">
+            <Grid item xs={4} textAlign={"center"}>
+              Your pup will savor every delicious bite of our gourmet dog food!
+            </Grid>
+            <Grid item xs={4} textAlign={"center"}>
+              Don't like an ingredient? Want to switch an ingredient for
+              another? We have your back.
+            </Grid>
+            <Grid item xs={4} textAlign={"center"}>
+              Crafted with only the finest all-natural ingredients, ensuring
+              your furry friend enjoys wholesome nutrition with every bite.
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+
+      <Box className="pink-bar">
+        <Container>
+          <Typography variant="h3" gutterBottom>
+            Customer Reviews
+          </Typography>
+          <Container>
+            <Grid
+              container
+              justifyContent="center"
+              alignItems="center"
+              spacing={2} // Adjust the spacing between grid items
+            >
+              <Grid item xs={4}>
+                <div style={{ textAlign: "center" }}>
+                  <img
+                    src="../public/Benjamin.jpg"
+                    alt="Benjamin"
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      maxWidth: "200px",
+                      maxHeight: "200px",
+                      borderRadius: "200px",
+                    }}
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={4}>
+                <div style={{ textAlign: "center" }}>
+                  <img
+                    src="../public/Henry.jpg"
+                    alt="Henry"
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      maxWidth: "200px",
+                      maxHeight: "200px",
+                      borderRadius: "200px",
+                    }}
+                  />
+                </div>
+              </Grid>
+              <Grid item xs={4}>
+                <div style={{ textAlign: "center" }}>
+                  <img
+                    src="../public/Kyler.jpeg"
+                    alt="Kyler"
+                    style={{
+                      width: "100%",
+                      height: "auto",
+                      maxWidth: "200px",
+                      maxHeight: "200px",
+                      borderRadius: "200px",
+                    }}
+                  />
+                </div>
+              </Grid>
+            </Grid>
+          </Container>
+
+          <Grid container>
+            <Grid item xs={4} textAlign={"center"}>
+              "mounch mounch mounch"
+            </Grid>
+            <Grid item xs={4} textAlign={"center"}>
+              "arf! huff, huff, arrf!!"
+            </Grid>
+            <Grid item xs={4} textAlign={"center"}>
+              "A most delightful spread of treats, a pleasure for my delicate
+              palate!"
+            </Grid>
+          </Grid>
+
+          <Grid container>
+            <Grid item xs={4} textAlign={"center"}>
+              Benjamin, 3.5 years old
+            </Grid>
+            <Grid item xs={4} textAlign={"center"}>
+              Henry, 7.1 years old
+            </Grid>
+            <Grid item xs={4} textAlign={"center"}>
+              Kyler, 4.8 years old
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+
+      <Box margin={4}>
+        <Container>
+          <Grid container className="blackText">
+            <Grid item xs={12} textAlign={"center"}>
+              <PetsRoundedIcon />
+            </Grid>
+            {/* <Grid item xs={6} textAlign={"center"}>
+              <SetMealRoundedIcon />
+            </Grid> */}
+          </Grid>
+          {/* <Grid container className="blackText">
+            <Grid item xs={6} textAlign={"center"}>
+              Treat Your Best Friend
+            </Grid>
+            <Grid item xs={6} textAlign={"center"}>
+              Allergy Friendly
+            </Grid>
+          </Grid> */}
         </Container>
       </Box>
     </div>

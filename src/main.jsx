@@ -7,8 +7,8 @@ import { UserProvider } from "./Context/UserContext.jsx";
 import { Auth0Provider } from "@auth0/auth0-react";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import HomePage from "./HomePage.jsx";
 import OrderPage from "./Ordering/OrderPage.jsx";
+import Checkout from "./Ordering/Cart/Checkout.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +28,10 @@ const router = createBrowserRouter([
   {
     path: "/order",
     element: <OrderPage />,
+  },
+  {
+    path: "/checkout",
+    element: <Checkout />,
   },
 ]);
 

@@ -1,19 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 /*
 <AppBar position="static"></AppBar>
 */
-import { Outlet, Link, useNavigate, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 
-import {
-  AppBar,
-  Toolbar,
-  Typography,
-  Container,
-  Link as MuiLink,
-  Box,
-} from "@mui/material";
+import { Toolbar, Typography, Link as MuiLink } from "@mui/material";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CartModal from "./Ordering/Cart/CartModal";
@@ -32,9 +25,13 @@ function NavBar() {
   //else, set the current user to the user that just logged in.
 
   //only try to access the userID if the user was authenticated first.
-  //or it will freak the fuck out
+  //or it will freak out
   const { userID } = useUser();
-  const [mealData, setMealData] = useState([]);
+  const [cartData, setCartData] = useState([]);
+
+  useEffect(() => {
+    getUserCartModalData();
+  }, [isAuthenticated, user]);
 
   const getUserCartModalData = async () => {
     const accessToken = await getAccessTokenSilently({
@@ -43,6 +40,9 @@ function NavBar() {
         "read:current_user update:current_user_metadata openid profile email",
     });
 
+    if (!(isAuthenticated && user) || userID === -1) {
+      return;
+    }
     var user_cart_data = [];
     axios
       .get(
@@ -58,12 +58,12 @@ function NavBar() {
       .then((response) => {
         user_cart_data = response.data;
         console.log("usercartdata", user_cart_data);
+        setCartData(user_cart_data);
       })
       .catch((error) => {
         console.log(error);
       });
   };
-
   const handleCartIconClick = async () => {
     await getUserCartModalData();
     setOpenCartModal(true);
@@ -72,7 +72,9 @@ function NavBar() {
   return (
     <Toolbar>
       <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-        <img src="/main-logo-black-transparent.png" id="fixedSizeImage" />
+        <Link to={"/"}>
+          <img src="/main-logo-black-transparent.png" id="fixedSizeImage" />
+        </Link>
       </Typography>
       <MuiLink color="inherit" sx={{ marginRight: 2 }}>
         {/* //Make this scroll down to the About Us section of the HomePage when
@@ -128,33 +130,10 @@ function NavBar() {
         modaldescription={"Here are your items."}
         open={openCartModal}
         setOpen={setOpenCartModal}
+        cartData={cartData}
       />
     </Toolbar>
   );
 }
 
 export default NavBar;
-
-/*
-    //once i get the cart modal data, I should put them into <p>tags and then stick them inside the cartmodal using map.
-    var allusercartmeals = user_cart_data.map((cartmeal, index) => (
-      //every single row of user_cart_data comes with a mealId. use the meal id to get the relevant data.
-      axios
-      .get(`${import.meta.env.VITE_SOME_BACKEND_MEAL_URL} +"/"+  ${cartmeal.mealId}`)
-      .then((response) => {
-        const singlemealdata = response.data;
-
-        console.log(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      })
-
-      <Box
-        key={index}
-        meal_name={singlemealdata.mealName}
-        meal_img_path={singlemealdata.mealPhoto}
-      />
-    ));
-  };
-*/

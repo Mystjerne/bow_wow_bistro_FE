@@ -67,11 +67,6 @@ export default function MealTile({
     }
   };
 
-  const handleCartIconClick = async () => {
-    await getUserCartModalData();
-    setOpenCartModal(true);
-  };
-
   return (
     <>
       <Card className="card" sx={{ maxWidth: 345, padding: 2, margin: 3 }}>
