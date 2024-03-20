@@ -2,10 +2,13 @@ import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import { Button, Grid, Link as MuiLink } from "@mui/material";
 import { Outlet, Link, useNavigate, Navigate } from "react-router-dom";
-import { useEffect, useState } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useUser } from "../../Context/UserContext";
+
 import axios from "axios";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { useState, useEffect } from "react";
+
 const style = {
   position: "absolute",
   top: "50%",
@@ -26,25 +29,58 @@ const style = {
 function CartModal({ modaltitle, modaldescription, open, setOpen, cartData }) {
   const navigate = useNavigate();
   //check if user has ebeen authenticated when clicked. If not authenticated, prompt user to log in.
-  const { isAuthenticated, user } = useAuth0();
-  var totalPrice = 0;
+  const { isAuthenticated, user, loginWithRedirect, getAccessTokenSilently } =
+    useAuth0();
+  const { userID } = useUser();
+  var calTotalPrice = 0;
 
   const handleClose = () => {
     setOpen(false);
   };
 
-  const handleCheckout = () => {
+  const handleCheckout = async () => {
+    //mark completed as true in the backend.
+    if (!isAuthenticated) {
+      loginWithRedirect();
+    } else if (user && isAuthenticated) {
+      //User is authenticated. need an access token for the protected axios request.
+      const accessToken = await getAccessTokenSilently({
+        audience: "https://project-4/api",
+        scope:
+          "read:current_user update:current_user_metadata openid profile email",
+      });
+      await axios
+        .put(
+          `${import.meta.env.VITE_SOME_BACKEND_CART_URL + "/" + userID}`,
+          {
+            completed: false,
+            totalPrice: calTotalPrice,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        )
+        .then((response) => {
+          const cart_completed = response.data;
+        })
+        .catch((error) => {
+          console.error("Error adding meal to cart:", error);
+        });
+    }
     navigate("/checkout");
   };
 
   const calculateTotalPrice = () => {
+    calTotalPrice = 0;
     cartData.forEach((meal, index) => {
       // Add the price of the current meal to the total price
-      totalPrice += meal.mealPrice;
+      calTotalPrice += meal.mealPrice;
     });
+    return calTotalPrice;
   };
 
-  calculateTotalPrice();
   return (
     <div>
       {isAuthenticated && user ? (
@@ -89,7 +125,7 @@ function CartModal({ modaltitle, modaldescription, open, setOpen, cartData }) {
 
             <Grid container>
               <Grid item xs={12} textAlign={"center"}>
-                Total Price: $ {totalPrice}
+                Total Price: $ {calculateTotalPrice()}
               </Grid>
             </Grid>
 
