@@ -64,6 +64,7 @@ function NavBar() {
         console.log(error);
       });
   };
+
   const handleCartIconClick = async () => {
     await getUserCartModalData();
     setOpenCartModal(true);
