@@ -20,8 +20,7 @@ export const UserProvider = ({ children }) => {
   //get userID from the backend, not from Auth0.
   const [userID, setUserID] = useState(-1);
 
-  //Not sure why keeping stuff in localstorage is needed. Can't i just get all the user details from auth0's provider?
-  //nvm i figured it out. im supposed to keep the accessToken in localstorage. the user details are okay to stay
+  //im supposed to keep the accessToken in localstorage. the user details are okay to stay
 
   const handleUserLogout = () => {
     setUserFirstName("");
