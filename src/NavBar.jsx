@@ -126,6 +126,17 @@ function NavBar() {
         <ShoppingCartIcon />
       </MuiLink>
 
+      <MuiLink
+        component={Link}
+        to="/history"
+        // color="inherit"
+        underline="hover"
+        sx={{ marginRight: 2 }}
+        variant="button"
+      >
+        History
+      </MuiLink>
+
       <CartModal
         modaltitle={"Cart"}
         modaldescription={"Here are your items."}

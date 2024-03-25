@@ -9,6 +9,7 @@ import { Auth0Provider } from "@auth0/auth0-react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import OrderPage from "./Ordering/OrderPage.jsx";
 import Checkout from "./Ordering/Cart/Checkout.jsx";
+import PurchaseHistory from "./PurchaseHistory.jsx";
 
 const router = createBrowserRouter([
   {
@@ -32,6 +33,10 @@ const router = createBrowserRouter([
   {
     path: "/checkout",
     element: <Checkout />,
+  },
+  {
+    path: "/history",
+    element: <PurchaseHistory />,
   },
 ]);
 

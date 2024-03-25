@@ -1,4 +1,4 @@
-import { Grid } from "@mui/material";
+import { CircularProgress, Grid } from "@mui/material";
 import MealTile from "./MealTile";
 import { useEffect, useState } from "react";
 import axios from "axios";
@@ -7,13 +7,14 @@ import NavBar from "../NavBar";
 
 function OrderPage() {
   //Make a get request to the backend for all the meals.
-
+  const [loading, setLoading] = useState(true);
   const [mealData, setMealData] = useState([]);
   const [AllIngredients, setAllIngredients] = useState([]);
   const { isAuthenticated, getAccessTokenSilently, loginWithRedirect, user } =
     useAuth0();
 
   //getting meal data doesn't need to be protected.
+  //Only get meals that have a null user id.
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_SOME_BACKEND_MEAL_URL}`)
@@ -25,6 +26,9 @@ function OrderPage() {
       })
       .catch((error) => {
         console.error("Error fetching data:", error);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, []);
 
@@ -71,6 +75,10 @@ function OrderPage() {
     };
     getAllIngredients();
   }, [isAuthenticated, user]);
+
+  if (loading) {
+    return <CircularProgress />;
+  }
 
   return (
     <div>

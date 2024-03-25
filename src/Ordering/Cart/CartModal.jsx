@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
-import { Button, Grid, Link as MuiLink } from "@mui/material";
-import { Outlet, Link, useNavigate, Navigate } from "react-router-dom";
+import { Button, Grid, Link as MuiLink, CircularProgress } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useUser } from "../../Context/UserContext";
 
@@ -28,6 +28,8 @@ const style = {
 
 function CartModal({ modaltitle, modaldescription, open, setOpen, cartData }) {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(true);
+
   //check if user has ebeen authenticated when clicked. If not authenticated, prompt user to log in.
   const { isAuthenticated, user, loginWithRedirect, getAccessTokenSilently } =
     useAuth0();
@@ -67,6 +69,9 @@ function CartModal({ modaltitle, modaldescription, open, setOpen, cartData }) {
         })
         .catch((error) => {
           console.error("Error adding meal to cart:", error);
+        })
+        .finally(() => {
+          setLoading(false);
         });
     }
     navigate("/checkout");
@@ -80,6 +85,10 @@ function CartModal({ modaltitle, modaldescription, open, setOpen, cartData }) {
     });
     return calTotalPrice;
   };
+
+  // if (loading) {
+  //   return <CircularProgress />;
+  // }
 
   return (
     <div>
