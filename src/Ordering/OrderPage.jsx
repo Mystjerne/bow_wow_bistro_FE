@@ -15,13 +15,15 @@ function OrderPage() {
 
   //getting meal data doesn't need to be protected.
   //Only get meals that have a null user id.
+
+  //Have to also get the meal's prices. have that info be given to the front end (calculated in the backend.)
   useEffect(() => {
     axios
       .get(`${import.meta.env.VITE_SOME_BACKEND_MEAL_URL}`)
       .then((response) => {
         const mealdata = response.data;
 
-        console.log(response.data);
+        console.log("mealdata!!!:", response.data);
         setMealData(mealdata);
       })
       .catch((error) => {
@@ -40,6 +42,7 @@ function OrderPage() {
         meal_description={meal.mealDescription}
         meal_img_path={meal.mealPhoto}
         meal_base_price={meal.basePrice}
+        meal_price={meal.mealPrice}
         AllIngredients={AllIngredients}
       />
     </Grid>

@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import { useEffect } from "react";
 import axios from "axios";
-import { Outlet } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
 function StripeTesting() {
   var itemsToPurchase = [
@@ -21,7 +21,6 @@ function StripeTesting() {
       .then((response) => {
         var stripedata = response.data;
         console.log(stripedata);
-        //the response is supposed to be an url?
       })
       .catch((error) => {
         console.error("Error sending a request to the backend about stripe.");
