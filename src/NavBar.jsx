@@ -66,6 +66,7 @@ function NavBar() {
   };
 
   const handleCartIconClick = async () => {
+    //get the cart data so I can put it in the CartModal
     await getUserCartModalData();
     setOpenCartModal(true);
   };

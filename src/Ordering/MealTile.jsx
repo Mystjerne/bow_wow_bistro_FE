@@ -20,6 +20,7 @@ export default function MealTile({
   meal_name,
   meal_description,
   meal_base_price,
+  meal_price,
   AllIngredients,
 }) {
   const { userID } = useUser();
@@ -82,6 +83,13 @@ export default function MealTile({
           </Typography>
           <Typography variant="body2" color="text.secondary">
             {meal_description}
+          </Typography>
+          <Typography
+            variant="body2"
+            color="text.secondary"
+            textAlign={"center"}
+          >
+            $ {meal_price}
           </Typography>
         </CardContent>
 
