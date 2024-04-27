@@ -8,6 +8,8 @@ import { useUser } from "../../Context/UserContext";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import { useState, useEffect } from "react";
+import axios from "axios";
+import { useRef } from "react";
 
 const style = {
   position: "absolute",
@@ -26,7 +28,14 @@ const style = {
   color: "black",
 };
 
-function CartModal({ modaltitle, modaldescription, open, setOpen, cartData }) {
+function CartModal({
+  modaltitle,
+  modaldescription,
+  open,
+  setOpen,
+  cartData,
+  setCartData,
+}) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
@@ -43,6 +52,41 @@ function CartModal({ modaltitle, modaldescription, open, setOpen, cartData }) {
   const handleCheckout = async () => {
     //mark completed as true in the backend.
     navigate("/stripe");
+  };
+
+  const handleDeleteItem = async (meal) => {
+    console.log("i am the meal id in handleDeleteItem", meal.id);
+
+    const accessToken = await getAccessTokenSilently({
+      audience: "https://project-4/api",
+      scope:
+        "read:current_user update:current_user_metadata openid profile email",
+    });
+
+    if (!(isAuthenticated && user) || userID === -1) {
+      return;
+    }
+
+    try {
+      var response = await axios.delete(
+        `${import.meta.env.VITE_SOME_BACKEND_CART_URL}/${userID}/current`,
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+          data: {
+            mealId: meal.id,
+          },
+        }
+      );
+
+      var updatedCartData = response.data;
+      setCartData([updatedCartData]);
+    } catch (error) {
+      console.log("axios request failed because of this :(");
+    }
+
+    //how sbould go about making the cartModal show the new cartdata after an item is deleted?
   };
 
   //cartData was gotten in the Navbar.
@@ -74,15 +118,7 @@ function CartModal({ modaltitle, modaldescription, open, setOpen, cartData }) {
             <h2 id="cart-modal-title" style={{ textAlign: "center" }}>
               {modaltitle} <ShoppingCartIcon />
             </h2>
-            <Grid container>
-              <Grid item xs={6} textAlign={"center"}>
-                Items
-              </Grid>
-              <Grid item xs={6} textAlign={"center"}>
-                Price
-              </Grid>
-            </Grid>
-            {/* <p id="cart-modal-description">{modaldescription}</p> */}
+            {/*map expects an array, so make sure cartData is an array.*/}
             {isAuthenticated ? (
               cartData.map((meal, index) => (
                 <Grid container key={index}>
@@ -93,7 +129,11 @@ function CartModal({ modaltitle, modaldescription, open, setOpen, cartData }) {
                     $ {meal.mealPrice}
                   </Grid>
                   <Grid item xs={4} textAlign={"center"}>
-                    <Button>
+                    <Button
+                      onClick={() => {
+                        handleDeleteItem(meal);
+                      }}
+                    >
                       <DeleteRoundedIcon />
                     </Button>
                   </Grid>

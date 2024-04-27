@@ -144,6 +144,7 @@ function NavBar() {
         open={openCartModal}
         setOpen={setOpenCartModal}
         cartData={cartData}
+        setCartData={setCartData}
       />
     </Toolbar>
   );
