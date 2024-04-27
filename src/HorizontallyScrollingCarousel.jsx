@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
-import { ImageList, ImageListItem, ImageListItemBar } from "@mui/material";
+import Carousel from "react-material-ui-carousel";
+
+import { Button, Paper } from "@mui/material";
 
 const images = [
   {
@@ -73,39 +75,39 @@ const images = [
   },
 ];
 
-const HorizontalScrollingCarousel = () => {
-  // Logic for tracking the current index of the displayed image
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  // Function to advance to the next image
-  const goToNextImage = () => {
-    setCurrentIndex((prevIndex) =>
-      prevIndex === images.length - 1 ? 0 : prevIndex + 1
-    );
-  };
-
-  // Automatically advance to the next image every few seconds
-  useEffect(() => {
-    const intervalId = setInterval(goToNextImage, 3000); // Change 3000 to desired interval in milliseconds
-    return () => clearInterval(intervalId);
-  }, []);
+function HorizontallScrollingCarousel(props) {
+  var items = [
+    {
+      name: "Random Name #1",
+      url: "../public/stock_dog_food.jpg",
+      description: "Probably the most random thing you have ever seen!",
+    },
+    {
+      name: "Random Name #2",
+      url: "https://images.pexels.com/photos/8753745/pexels-photo-8753745.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+      description: "Hello World!",
+    },
+  ];
 
   return (
-    <ImageList
-      sx={{
-        gridAutoFlow: "column",
-        gridTemplateColumns: "repeat(auto-fit, minmax(160px,1fr)) !important",
-        gridAutoColumns: "minmax(160px, 1fr)",
-      }}
-    >
-      {images.map((image, index) => (
-        <ImageListItem key={index}>
-          <img src={image.thumbnail.uri} />
-          <ImageListItemBar title={image.thumbnail.name} />
-        </ImageListItem>
+    <Carousel>
+      {items.map((item, i) => (
+        <Item key={i} item={item} />
       ))}
-    </ImageList>
+    </Carousel>
   );
-};
+}
 
-export default HorizontalScrollingCarousel;
+function Item(props) {
+  return (
+    <Paper>
+      <h2>{props.item.name}</h2>
+      <img className="carousel-image" src={`${props.item.url}`}></img>
+      <p>{props.item.description}</p>
+
+      <Button className="CheckButton">Check it out!</Button>
+    </Paper>
+  );
+}
+
+export default HorizontallScrollingCarousel;
