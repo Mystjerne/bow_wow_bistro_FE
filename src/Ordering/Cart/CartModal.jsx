@@ -5,8 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useUser } from "../../Context/UserContext";
 
-import axios from "axios";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import DeleteRoundedIcon from "@mui/icons-material/DeleteRounded";
 import { useState, useEffect } from "react";
 
 const style = {
@@ -30,7 +30,7 @@ function CartModal({ modaltitle, modaldescription, open, setOpen, cartData }) {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(true);
 
-  //check if user has ebeen authenticated when clicked. If not authenticated, prompt user to log in.
+  //check if user has been authenticated when clicked. If not authenticated, prompt user to log in.
   const { isAuthenticated, user, loginWithRedirect, getAccessTokenSilently } =
     useAuth0();
   const { userID } = useUser();
@@ -42,41 +42,11 @@ function CartModal({ modaltitle, modaldescription, open, setOpen, cartData }) {
 
   const handleCheckout = async () => {
     //mark completed as true in the backend.
-    if (!isAuthenticated) {
-      loginWithRedirect();
-    } else if (user && isAuthenticated) {
-      //User is authenticated. need an access token for the protected axios request.
-      const accessToken = await getAccessTokenSilently({
-        audience: "https://project-4/api",
-        scope:
-          "read:current_user update:current_user_metadata openid profile email",
-      });
-      await axios
-        .put(
-          `${import.meta.env.VITE_SOME_BACKEND_CART_URL + "/" + userID}`,
-          {
-            completed: false,
-            totalPrice: calTotalPrice,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
-        )
-        .then((response) => {
-          const cart_completed = response.data;
-        })
-        .catch((error) => {
-          console.error("Error adding meal to cart:", error);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }
-    navigate("/checkout");
+    navigate("/stripe");
   };
 
+  //cartData was gotten in the Navbar.
+  //Do not calculate the total price in the front end and then try to charge using the value you calculated.
   const calculateTotalPrice = () => {
     calTotalPrice = 0;
     cartData.forEach((meal, index) => {
@@ -85,10 +55,6 @@ function CartModal({ modaltitle, modaldescription, open, setOpen, cartData }) {
     });
     return calTotalPrice;
   };
-
-  // if (loading) {
-  //   return <CircularProgress />;
-  // }
 
   return (
     <div>
@@ -120,11 +86,16 @@ function CartModal({ modaltitle, modaldescription, open, setOpen, cartData }) {
             {isAuthenticated ? (
               cartData.map((meal, index) => (
                 <Grid container key={index}>
-                  <Grid item xs={6} textAlign={"center"}>
+                  <Grid item xs={4} textAlign={"center"}>
                     {meal.mealName}
                   </Grid>
-                  <Grid item xs={6} textAlign={"center"}>
+                  <Grid item xs={4} textAlign={"center"}>
                     $ {meal.mealPrice}
+                  </Grid>
+                  <Grid item xs={4} textAlign={"center"}>
+                    <Button>
+                      <DeleteRoundedIcon />
+                    </Button>
                   </Grid>
                 </Grid>
               ))
@@ -150,3 +121,44 @@ function CartModal({ modaltitle, modaldescription, open, setOpen, cartData }) {
 }
 
 export default CartModal;
+
+/*
+  const handleCheckout = async () => {
+    //mark completed as true in the backend.
+    if (!isAuthenticated) {
+      loginWithRedirect();
+    } else if (user && isAuthenticated) {
+      //User is authenticated. need an access token for the protected axios request.
+      const accessToken = await getAccessTokenSilently({
+        audience: "https://project-4/api",
+        scope:
+          "read:current_user update:current_user_metadata openid profile email",
+      });
+      //NOTE 24/4 it doesn't seem safe to modify the backend's totalPrice value of the cart using calculations from the frontend.
+      await axios
+        .put(
+          `${import.meta.env.VITE_SOME_BACKEND_CART_URL + "/" + userID}`,
+          {
+            completed: false,
+            totalPrice: calTotalPrice,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        )
+        .then((response) => {
+          const cart_completed = response.data;
+        })
+        .catch((error) => {
+          console.error("Error adding meal to cart:", error);
+        })
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+    navigate("/checkout");
+  };
+
+*/

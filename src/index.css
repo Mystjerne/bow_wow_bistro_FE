@@ -28,6 +28,10 @@
   color: black;
 }
 
+.carousel-image {
+  width: 100vw;
+  height: 25vh;
+}
 /* #fixedSizeImage {
   width: 200px;
   height: 200px;
