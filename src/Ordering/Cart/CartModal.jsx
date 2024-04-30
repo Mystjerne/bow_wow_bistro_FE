@@ -80,13 +80,12 @@ function CartModal({
         }
       );
 
-      var updatedCartData = response.data;
-      setCartData([updatedCartData]);
+      var updatedCartData = await response.data;
+      console.log("response.data:", response.data);
+      setCartData(updatedCartData);
     } catch (error) {
       console.log("axios request failed because of this :(");
     }
-
-    //how sbould go about making the cartModal show the new cartdata after an item is deleted?
   };
 
   //cartData was gotten in the Navbar.
@@ -99,6 +98,10 @@ function CartModal({
     });
     return calTotalPrice;
   };
+
+  useEffect(() => {
+    console.log("cartdata has changed. it is now:", cartData);
+  }, [cartData]);
 
   return (
     <div>
@@ -119,7 +122,7 @@ function CartModal({
               {modaltitle} <ShoppingCartIcon />
             </h2>
             {/*map expects an array, so make sure cartData is an array.*/}
-            {isAuthenticated ? (
+            {isAuthenticated && cartData ? (
               cartData.map((meal, index) => (
                 <Grid container key={index}>
                   <Grid item xs={4} textAlign={"center"}>
