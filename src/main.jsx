@@ -10,9 +10,9 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import OrderPage from "./Ordering/OrderPage.jsx";
 import Checkout from "./Ordering/Cart/Checkout.jsx";
 import PurchaseHistory from "./PurchaseHistory.jsx";
-import StripeTesting from "./StripeTesting.jsx";
-import StripeSuccessPage from "./StripeSuccessPage.jsx";
-import StripeFailurePage from "./StripeFailurePage.jsx";
+import StripeTesting from "./Ordering/Checkout.jsx/StripeTesting.jsx";
+import StripeSuccessPage from "./Ordering/Checkout.jsx/StripeSuccessPage.jsx";
+import StripeFailurePage from "./Ordering/Checkout.jsx/StripeFailurePage.jsx";
 import NavBar from "./NavBar.jsx";
 
 const router = createBrowserRouter([
