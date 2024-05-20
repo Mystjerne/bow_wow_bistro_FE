@@ -12,11 +12,28 @@ import { useState, useEffect } from "react";
 import PetsRoundedIcon from "@mui/icons-material/PetsRounded";
 import SetMealRoundedIcon from "@mui/icons-material/SetMealRounded";
 import EggRoundedIcon from "@mui/icons-material/EggRounded";
+import ReviewTile from "./Ordering/ReviewTile";
 
 function HomePage() {
   return (
     <div>
       <NavBar />
+
+      <ReviewTile
+        reviewer_name="Benjamin, 3.5 years old"
+        review_text="mounch mounch mounch"
+        reviewer_image_src={"../public/Benjamin.jpg"}
+        borderRight={true}
+        borderLeft={false}
+      />
+
+      <ReviewTile
+        reviewer_name="Benjamin, 3.5 years old"
+        review_text="mounch mounch mounch"
+        reviewer_image_src={"../public/Benjamin.jpg"}
+        borderRight={true}
+        borderLeft={true}
+      />
 
       <HorizontalScrollingCarousel />
 
