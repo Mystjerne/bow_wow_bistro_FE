@@ -40,6 +40,16 @@
   border-radius: 15px;
 }
 
+/*
+button styling needs work (some feedback on hover)
+About Us ->? similar colour, but slightly lighter than the box (#6f1d1b)
+better logo??? 
+increase margin of red box from the border -> increase border raidus
+nav bar that sticks to the top of the screen when scrolling down (but changes into a smaller form?)
+-> side slide out thing
+no link blue
+
+*/
 /* #fixedSizeImage {
   width: 200px;
   height: 200px;
