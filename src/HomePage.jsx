@@ -22,10 +22,10 @@ function HomePage() {
 
       <Box className="pink-bar">
         <Container>
-          <Typography variant="h3" gutterBottom>
+          <Typography variant="h3" gutterBottom textAlign={"center"}>
             About Us
           </Typography>
-          <Typography variant="body1">
+          <Typography variant="body1" textAlign={"center"}>
             Welcome to our dog-friendly restaurant in Singapore, where every
             dish reflects our love for dogs. Inspired by our furry friend
             Darcie, we craft wholesome meals tailored to their unique needs.
@@ -62,7 +62,12 @@ function HomePage() {
           </Grid>
 
           <Grid container className="blackText">
-            <Grid item xs={4} textAlign={"center"}>
+            <Grid
+              item
+              xs={4}
+              textAlign={"center"}
+              // style={{ whiteSpace: "normal" }}
+            >
               Your pup will savor every delicious bite of our gourmet dog food!
             </Grid>
             <Grid item xs={4} textAlign={"center"}>
@@ -79,7 +84,7 @@ function HomePage() {
 
       <Box className="pink-bar">
         <Container>
-          <Typography variant="h3" gutterBottom>
+          <Typography variant="h3" gutterBottom textAlign={"center"}>
             Customer Reviews
           </Typography>
           <Container>
