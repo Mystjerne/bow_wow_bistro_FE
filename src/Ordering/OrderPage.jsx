@@ -35,7 +35,10 @@ function OrderPage() {
   }, []);
 
   var allmealtiles = mealData.map((meal, index) => (
-    <Grid key={index}>
+    <Grid
+      key={index}
+      style={{ transform: `rotate(${Math.random() * 10 - 5}deg)` }}
+    >
       <MealTile
         meal_id={meal.id}
         meal_name={meal.mealName}
