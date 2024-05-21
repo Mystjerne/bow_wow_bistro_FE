@@ -90,7 +90,7 @@ function OrderPage() {
     <div>
       <NavBar />
       {isAuthenticated ? (
-        <Grid container spacing={0}>
+        <Grid container spacing={0} justifyContent={"center"}>
           {allmealtiles}
         </Grid>
       ) : null}

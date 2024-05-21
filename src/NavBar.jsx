@@ -82,10 +82,31 @@ function NavBar() {
         {/* //Make this scroll down to the About Us section of the HomePage when
           clicked. */}
       </MuiLink>
+
       <MuiLink
         component={Link}
         to="/order"
-        // color="inherit"
+        color="#432818"
+        underline="hover"
+        sx={{
+          marginRight: 2,
+          padding: "8px 16px",
+          borderRadius: "4px",
+          transition: "background-color 0.3s ease",
+          "&:hover": {
+            backgroundColor: "#f4e1d2",
+            textDecoration: "none",
+          },
+          typography: "button",
+          fontWeight: "bold",
+        }}
+      >
+        Order
+      </MuiLink>
+      <MuiLink
+        component={Link}
+        to="/order"
+        color="#432818"
         underline="hover"
         sx={{ marginRight: 2 }}
         variant="button"
@@ -95,7 +116,7 @@ function NavBar() {
 
       {isAuthenticated ? (
         <MuiLink
-          // color="inherit"
+          className="navbar-link"
           underline="hover"
           variant="button"
           sx={{ marginRight: 2 }}
@@ -108,6 +129,7 @@ function NavBar() {
       ) : (
         <MuiLink
           // color="inherit"
+          className="navbar-link"
           underline="hover"
           variant="button"
           sx={{ marginRight: 2 }}
