@@ -18,23 +18,6 @@ function HomePage() {
   return (
     <div>
       <NavBar />
-
-      <ReviewTile
-        reviewer_name="Benjamin, 3.5 years old"
-        review_text="mounch mounch mounch"
-        reviewer_image_src={"../public/Benjamin.jpg"}
-        borderRight={true}
-        borderLeft={false}
-      />
-
-      <ReviewTile
-        reviewer_name="Benjamin, 3.5 years old"
-        review_text="mounch mounch mounch"
-        reviewer_image_src={"../public/Benjamin.jpg"}
-        borderRight={true}
-        borderLeft={true}
-      />
-
       <HorizontalScrollingCarousel />
 
       <Box className="pink-bar">
@@ -104,83 +87,41 @@ function HomePage() {
           <Typography variant="h3" gutterBottom textAlign={"center"}>
             Customer Reviews
           </Typography>
-          <Container>
-            <Grid
-              container
-              justifyContent="center"
-              alignItems="center"
-              spacing={2} // Adjust the spacing between grid items
-            >
-              <Grid item xs={4}>
-                <div style={{ textAlign: "center" }}>
-                  <img
-                    src="../public/Benjamin.jpg"
-                    alt="Benjamin"
-                    style={{
-                      width: "100%",
-                      height: "auto",
-                      maxWidth: "200px",
-                      maxHeight: "200px",
-                      borderRadius: "200px",
-                    }}
-                  />
-                </div>
-              </Grid>
-              <Grid item xs={4}>
-                <div style={{ textAlign: "center" }}>
-                  <img
-                    src="../public/Henry.jpg"
-                    alt="Henry"
-                    style={{
-                      width: "100%",
-                      height: "auto",
-                      maxWidth: "200px",
-                      maxHeight: "200px",
-                      borderRadius: "200px",
-                    }}
-                  />
-                </div>
-              </Grid>
-              <Grid item xs={4}>
-                <div style={{ textAlign: "center" }}>
-                  <img
-                    src="../public/Kyler.jpeg"
-                    alt="Kyler"
-                    style={{
-                      width: "100%",
-                      height: "auto",
-                      maxWidth: "200px",
-                      maxHeight: "200px",
-                      borderRadius: "200px",
-                    }}
-                  />
-                </div>
-              </Grid>
-            </Grid>
-          </Container>
+        </Container>
 
-          <Grid container>
-            <Grid item xs={4} textAlign={"center"}>
-              "mounch mounch mounch"
+        <Container>
+          <Grid
+            container
+            justifyContent="center"
+            alignItems="center"
+            // Adjust the spacing between grid items
+          >
+            <Grid item xs={4}>
+              <ReviewTile
+                reviewer_name="Benjamin, 3.5 years old"
+                review_text="mounch mounch mounch"
+                reviewer_image_src={"../public/Benjamin.jpg"}
+                borderRight={false}
+                borderLeft={false}
+              />
             </Grid>
-            <Grid item xs={4} textAlign={"center"}>
-              "arf! huff, huff, arrf!!"
+            <Grid item xs={4}>
+              <ReviewTile
+                reviewer_name="Benjamin, 3.5 years old"
+                review_text="mounch mounch mounch"
+                reviewer_image_src={"../public/Benjamin.jpg"}
+                borderRight={true}
+                borderLeft={true}
+              />
             </Grid>
-            <Grid item xs={4} textAlign={"center"}>
-              "A most delightful spread of treats, a pleasure for my delicate
-              palate!"
-            </Grid>
-          </Grid>
-
-          <Grid container>
-            <Grid item xs={4} textAlign={"center"}>
-              Benjamin, 3.5 years old
-            </Grid>
-            <Grid item xs={4} textAlign={"center"}>
-              Henry, 7.1 years old
-            </Grid>
-            <Grid item xs={4} textAlign={"center"}>
-              Kyler, 4.8 years old
+            <Grid item xs={4}>
+              <ReviewTile
+                reviewer_name="Benjamin, 3.5 years old"
+                review_text="mounch mounch mounch"
+                reviewer_image_src={"../public/Benjamin.jpg"}
+                borderRight={false}
+                borderLeft={false}
+              />
             </Grid>
           </Grid>
         </Container>
@@ -211,6 +152,7 @@ function HomePage() {
 }
 
 export default HomePage;
+
 // useEffect(() => {
 //   if (isAuthenticated && user) {
 //     console.log("email - ", user.email);
