@@ -1,10 +1,15 @@
 import { useState, useEffect } from "react";
 import Carousel from "react-material-ui-carousel";
-
-import { Button, Paper } from "@mui/material";
-
+import {
+  Button,
+  Paper,
+  Grid,
+  Typography,
+  Link as MuiLink,
+} from "@mui/material";
+import { Link } from "react-router-dom";
 function HorizontallScrollingCarousel(props) {
-  var items = [
+  const items = [
     {
       name: "Random Name #1",
       url: "/beef-carousel-image.jpg",
@@ -29,11 +34,40 @@ function HorizontallScrollingCarousel(props) {
 function Item(props) {
   return (
     <Paper>
-      {/* <h2>{props.item.name}</h2> */}
-      <img className="carousel-image" src={`${props.item.url}`}></img>
-      {/* <p>{props.item.description}</p> */}
-
-      <Button className="CheckButton">Order</Button>
+      <div className="carousel-grid">
+        <div className="carousel-item">
+          <img
+            className="carousel-image"
+            src={props.item.url}
+            alt={props.item.name}
+          />
+        </div>
+        <div className="carousel-item">
+          {/* <Typography variant="h5">{props.item.name}</Typography>
+          <Typography variant="body1">{props.item.description}</Typography> */}
+          <MuiLink
+            component={Link}
+            to="/order"
+            color="#432818"
+            justifyItems={"center"}
+            underline="hover"
+            sx={{
+              marginRight: 2,
+              padding: "8px 16px",
+              borderRadius: "4px",
+              transition: "background-color 0.3s ease",
+              "&:hover": {
+                backgroundColor: "#f4e1d2",
+                textDecoration: "none",
+              },
+              typography: "button",
+              fontWeight: "bold",
+            }}
+          >
+            Order
+          </MuiLink>
+        </div>
+      </div>
     </Paper>
   );
 }

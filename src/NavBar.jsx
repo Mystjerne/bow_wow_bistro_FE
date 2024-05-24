@@ -6,11 +6,12 @@ import { Link } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
 import axios from "axios";
 
-import { Toolbar, Typography, Link as MuiLink } from "@mui/material";
+import { Toolbar, Typography, Link as MuiLink, Box } from "@mui/material";
 
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import CartModal from "./Ordering/Cart/CartModal";
 import { useUser } from "./Context/UserContext";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
 function NavBar() {
   const {
@@ -70,14 +71,37 @@ function NavBar() {
     await getUserCartModalData();
     setOpenCartModal(true);
   };
+  //id="fixedSizeImage"
+  //sx={{ display: { xs: "flex", md: "none" }
 
   return (
     <Toolbar>
-      <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-        <Link to={"/"}>
-          <img src="/main-logo-black-transparent.png" id="fixedSizeImage" />
-        </Link>
-      </Typography>
+      <Box sx={{ flexGrow: 1 }}>
+        <Grid2 container alignItems="center">
+          <Grid2 item>
+            <Link to="/">
+              <img
+                style={{ height: 50, width: 50 }}
+                src="/bowwowicon.png"
+                alt="Bow Wow Bistro logo"
+              />
+            </Link>
+          </Grid2>
+
+          <Grid2 item sx={{ display: { xs: "none", md: "flex" } }}>
+            <Typography
+              sx={{
+                marginLeft: 2,
+                fontFamily: "monospace",
+                fontWeight: "bold",
+              }}
+            >
+              Bow Wow Bistro
+            </Typography>
+          </Grid2>
+        </Grid2>
+      </Box>
+
       <MuiLink color="inherit" sx={{ marginRight: 2 }}>
         {/* //Make this scroll down to the About Us section of the HomePage when
           clicked. */}
@@ -103,23 +127,37 @@ function NavBar() {
       >
         Order
       </MuiLink>
-      <MuiLink
-        component={Link}
-        to="/order"
-        color="#432818"
-        underline="hover"
-        sx={{ marginRight: 2 }}
-        variant="button"
-      >
-        Order
-      </MuiLink>
 
       {isAuthenticated ? (
+        // <MuiLink
+        //   className="navbar-link"
+        //   underline="hover"
+        //   variant="button"
+        //   sx={{ marginRight: 2 }}
+        //   onClick={() =>
+        //     logout({ logoutParams: { returnTo: window.location.origin } })
+        //   }
+        // >
+        //   Logout
+        // </MuiLink>
+
         <MuiLink
-          className="navbar-link"
+          // component={Link}
+          // to="/order"
+          color="#432818"
           underline="hover"
-          variant="button"
-          sx={{ marginRight: 2 }}
+          sx={{
+            marginRight: 2,
+            padding: "8px 16px",
+            borderRadius: "4px",
+            transition: "background-color 0.3s ease",
+            "&:hover": {
+              backgroundColor: "#f4e1d2",
+              textDecoration: "none",
+            },
+            typography: "button",
+            fontWeight: "bold",
+          }}
           onClick={() =>
             logout({ logoutParams: { returnTo: window.location.origin } })
           }
@@ -128,38 +166,68 @@ function NavBar() {
         </MuiLink>
       ) : (
         <MuiLink
-          // color="inherit"
-          className="navbar-link"
+          // component={Link}
+          // to="/order"
+          color="#432818"
           underline="hover"
-          variant="button"
-          sx={{ marginRight: 2 }}
+          sx={{
+            marginRight: 2,
+            padding: "8px 16px",
+            borderRadius: "4px",
+            transition: "background-color 0.3s ease",
+            "&:hover": {
+              backgroundColor: "#f4e1d2",
+              textDecoration: "none",
+            },
+            typography: "button",
+            fontWeight: "bold",
+          }}
           onClick={() => loginWithRedirect()}
         >
-          SignUp/Login
+          Login
         </MuiLink>
       )}
 
       <MuiLink
-        // color="inherit"
+        component={Link}
+        to="/history"
+        color="#432818"
+        underline="hover"
+        sx={{
+          marginRight: 2,
+          padding: "8px 16px",
+          borderRadius: "4px",
+          transition: "background-color 0.3s ease",
+          "&:hover": {
+            backgroundColor: "#f4e1d2",
+            textDecoration: "none",
+          },
+          typography: "button",
+          fontWeight: "bold",
+        }}
+      >
+        History
+      </MuiLink>
+      <MuiLink
         underline="hover"
         variant="button"
-        sx={{ marginRight: 2 }}
+        color="#432818"
+        sx={{
+          marginRight: 2,
+          padding: "8px 16px",
+          borderRadius: "4px",
+          transition: "background-color 0.3s ease",
+          "&:hover": {
+            backgroundColor: "#f4e1d2",
+            textDecoration: "none",
+          },
+          typography: "button",
+          fontWeight: "bold",
+        }}
         onClick={handleCartIconClick}
       >
         <ShoppingCartIcon />
       </MuiLink>
-
-      <MuiLink
-        component={Link}
-        to="/history"
-        // color="inherit"
-        underline="hover"
-        sx={{ marginRight: 2 }}
-        variant="button"
-      >
-        History
-      </MuiLink>
-
       <CartModal
         modaltitle={"Cart"}
         modaldescription={"Here are your items."}
