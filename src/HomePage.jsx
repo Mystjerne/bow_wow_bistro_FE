@@ -13,14 +13,16 @@ import PetsRoundedIcon from "@mui/icons-material/PetsRounded";
 import SetMealRoundedIcon from "@mui/icons-material/SetMealRounded";
 import EggRoundedIcon from "@mui/icons-material/EggRounded";
 import ReviewTile from "./Ordering/ReviewTile";
+import ResponsiveAppBar from "./ResponsiveAppBarExp";
 
 function HomePage() {
   return (
     <div>
+      {/* <ResponsiveAppBar /> */}
       <NavBar />
       <HorizontalScrollingCarousel />
 
-      <Box className="pink-bar">
+      <Box className="red-bar">
         <Container>
           <Typography variant="h3" gutterBottom textAlign={"center"}>
             About Us
@@ -82,7 +84,7 @@ function HomePage() {
         </Container>
       </Box>
 
-      <Box className="pink-bar">
+      <Box className="red-bar">
         <Container>
           <Typography variant="h3" gutterBottom textAlign={"center"}>
             Customer Reviews
@@ -107,18 +109,18 @@ function HomePage() {
             </Grid>
             <Grid item xs={4}>
               <ReviewTile
-                reviewer_name="Benjamin, 3.5 years old"
-                review_text="mounch mounch mounch"
-                reviewer_image_src={"../public/Benjamin.jpg"}
+                reviewer_name="Henry, 3 years old"
+                review_text="WOOF WOOF WOOF GRR WOOF WOOF WOOF"
+                reviewer_image_src={"../public/Henry.jpg"}
                 borderRight={true}
                 borderLeft={true}
               />
             </Grid>
             <Grid item xs={4}>
               <ReviewTile
-                reviewer_name="Benjamin, 3.5 years old"
-                review_text="mounch mounch mounch"
-                reviewer_image_src={"../public/Benjamin.jpg"}
+                reviewer_name="Yuki, 5 years old"
+                review_text="A most delightful variety of the most scrumptious foods are offered at Bow Wow!"
+                reviewer_image_src={"../public/Yuki.jpg"}
                 borderRight={false}
                 borderLeft={false}
               />
@@ -152,22 +154,3 @@ function HomePage() {
 }
 
 export default HomePage;
-
-// useEffect(() => {
-//   if (isAuthenticated && user) {
-//     console.log("email - ", user.email);
-//     console.log("image - ", user.picture);
-//     console.log("user first name - ", user.given_name);
-//     console.log("user data", user);
-//   }
-// }, [isAuthenticated, user]);
-
-// const  fetchData = async () => {
-//   try {
-//     const accessToken = await getAccessTokenSilently({
-//       authorizationParams: {
-//         audience: `https://${domain}/api/v2/`,
-//         scope: "read:current_user",
-//       },
-//     });
-// }
