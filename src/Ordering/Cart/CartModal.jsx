@@ -157,7 +157,7 @@ function CartModal({
           </Box>
         </Modal>
       ) : (
-        <p className="blackText">Please sign in to view your cart.</p>
+        <p>Please log in.</p>
       )}
     </div>
   );

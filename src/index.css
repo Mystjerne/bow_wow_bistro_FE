@@ -22,6 +22,9 @@
 
 .red-bar {
   background-color: #6f1d1b;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  border-radius: 15px;
 }
 
 .blackText {
@@ -44,6 +47,25 @@
   .carousel-grid {
     flex-direction: column;
   }
+  .red-bar {
+    background-color: aqua;
+  }
+}
+
+.red-bar {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Media query for small screens */
+@media (max-width: 600px) {
+  .red-bar {
+    flex-direction: column;
+  }
+
+  .red-bar > * {
+    width: 100%;
+  }
 }
 
 /* .carousel-grid {
@@ -52,12 +74,6 @@
   align-items: center;
   justify-content: center;
 } */
-
-.css-1oqqzyl-MuiContainer-root {
-  padding-top: 24px;
-  padding-bottom: 24px;
-  border-radius: 15px;
-}
 
 /*
 button styling needs work (some feedback on hover)
