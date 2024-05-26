@@ -26,7 +26,7 @@ export default function ReviewTile({
     >
       <img
         src={reviewer_image_src}
-        alt="Benjamin"
+        alt="reviewer_info"
         style={{
           width: "100%",
           height: "auto",

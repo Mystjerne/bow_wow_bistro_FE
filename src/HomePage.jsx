@@ -84,7 +84,10 @@ function HomePage() {
         </Container>
       </Box>
 
-      <Box className="red-bar">
+      <Box
+        className="red-bar"
+        sx={{ flexDirection: { xs: "column", md: "flex" } }}
+      >
         <Container>
           <Typography variant="h3" gutterBottom textAlign={"center"}>
             Customer Reviews
@@ -118,8 +121,8 @@ function HomePage() {
             </Grid>
             <Grid item xs={4}>
               <ReviewTile
-                reviewer_name="Yuki, 5 years old"
-                review_text="A most delightful variety of the most scrumptious foods are offered at Bow Wow!"
+                reviewer_name="Yuki, 3 months old"
+                review_text="Bow Wow offers the most delightful foods I've ever sampled in my life!"
                 reviewer_image_src={"../public/Yuki.jpg"}
                 borderRight={false}
                 borderLeft={false}
