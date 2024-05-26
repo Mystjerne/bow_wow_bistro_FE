@@ -9,19 +9,16 @@ export const UserProvider = ({ children }) => {
   const [userFirstName, setUserFirstName] = useState(
     localStorage.getItem("userFirstName") || ""
   );
-
   const [userImage, setUserImage] = useState(
     localStorage.getItem("userImage") || ""
   );
   const [userEmail, setUserEmail] = useState(
     localStorage.getItem("userEmail") || ""
   );
-
   //get userID from the backend, not from Auth0.
   const [userID, setUserID] = useState(-1);
 
   //im supposed to keep the accessToken in localstorage. the user details are okay to stay
-
   const handleUserLogout = () => {
     setUserFirstName("");
     setUserImage("");
@@ -49,63 +46,55 @@ export const UserProvider = ({ children }) => {
             scope:
               "read:current_user update:current_user_metadata openid profile email",
           });
-          axios
-            .post(
-              `${import.meta.env.VITE_SOME_BACKEND_USER_URL + "/check"}`,
+
+          //check to see if the user (that exists) is actually in the database.
+          const response = await axios.post(
+            `${import.meta.env.VITE_SOME_BACKEND_USER_URL + "/check"}`,
+            {
+              email: user.email,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+              },
+            }
+          );
+
+          //the user does not exist in the database, which means it does not have a cart yet.
+          //add the user into the database, and give it a cart.
+          if (response.data === "The user does not exist in the database.") {
+            const newUserReqResponse = await axios.post(
+              `${import.meta.env.VITE_SOME_BACKEND_USER_URL}`,
               {
                 email: user.email,
+                admin: false,
+              }
+            );
+
+            const newUser = newUserReqResponse.data;
+
+            setUserID(newUser.id);
+
+            const createCartReq = await axios.post(
+              `${import.meta.env.VITE_SOME_BACKEND_CART_URL}`,
+              {
+                userId: newUser.id,
+                totalPrice: 0,
+                completed: false,
               },
               {
                 headers: {
                   Authorization: `Bearer ${accessToken}`,
                 },
               }
-            )
-            .then((response) => {
-              if (
-                response.data === "The user does not exist in the database."
-              ) {
-                //send an axios request to add the user.
-                axios
-                  .post(`${import.meta.env.VITE_SOME_BACKEND_USER_URL}`, {
-                    email: user.email,
-                    admin: false,
-                  })
-                  .then(async (response) => {
-                    const newUser = response.data;
-                    setUserID(newUser.id);
+            );
 
-                    //get an accessToken so I can make a new cart
-
-                    //Make a new cart for the new user.
-                    axios
-                      .post(
-                        `${import.meta.env.VITE_SOME_BACKEND_CART_URL}`,
-                        {
-                          userId: newUser.id,
-                          totalPrice: 0,
-                          completed: false,
-                        },
-                        {
-                          headers: {
-                            Authorization: `Bearer ${accessToken}`,
-                          },
-                        }
-                      )
-                      .then((response) => {
-                        const newCart = response.data;
-                      });
-                  });
-              } else {
-                //the user exists. get the user's id and store it in UserContext so we can use it for other stuff
-                const user_data = response.data;
-                console.log(user_data);
-                setUserID(user_data.id);
-              }
-            })
-            .catch((error) => {
-              console.log(error);
-            });
+            //the user exists in the database. get the user's id and store it in UserContext so we can use it for other stuff
+          } else {
+            const user_data = response.data;
+            console.log(user_data);
+            setUserID(user_data.id);
+          }
         }
       };
 
