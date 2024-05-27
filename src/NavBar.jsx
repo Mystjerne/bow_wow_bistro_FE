@@ -45,6 +45,8 @@ function NavBar() {
       return;
     }
     var user_cart_data = [];
+
+    console.log("I am being triggered before the cartdata is being gotten.");
     axios
       .get(
         `${
@@ -102,11 +104,6 @@ function NavBar() {
         </Grid2>
       </Box>
 
-      <MuiLink color="inherit" sx={{ marginRight: 2 }}>
-        {/* //Make this scroll down to the About Us section of the HomePage when
-          clicked. */}
-      </MuiLink>
-
       <MuiLink
         component={Link}
         to="/order"
@@ -129,21 +126,7 @@ function NavBar() {
       </MuiLink>
 
       {isAuthenticated ? (
-        // <MuiLink
-        //   className="navbar-link"
-        //   underline="hover"
-        //   variant="button"
-        //   sx={{ marginRight: 2 }}
-        //   onClick={() =>
-        //     logout({ logoutParams: { returnTo: window.location.origin } })
-        //   }
-        // >
-        //   Logout
-        // </MuiLink>
-
         <MuiLink
-          // component={Link}
-          // to="/order"
           color="#432818"
           underline="hover"
           sx={{

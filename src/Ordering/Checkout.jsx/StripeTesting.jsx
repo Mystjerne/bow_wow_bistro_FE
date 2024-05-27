@@ -47,7 +47,7 @@ function StripeTesting() {
 
         setCartData(response.data);
         let itemsToPurchase = transformMealsToItems(response.data);
-        console.log("i am items to purchase:", itemsToPurchase);
+
         //make an axios request to start the stripe checkout process
         axios
           .post(`${import.meta.env.VITE_SOME_BACKEND_STRIPE_URL}`, {
@@ -55,7 +55,6 @@ function StripeTesting() {
           })
           .then((response) => {
             stripeurl = response.data;
-            console.log("i am stripeurl", stripeurl.url);
             window.location = stripeurl.url;
           })
           .catch((error) => {
@@ -72,10 +71,6 @@ function StripeTesting() {
 
     getUserCartModalData();
   }, [isAuthenticated, user, userID]);
-
-  useEffect(() => {
-    console.log("i am cartdata from stripetesting", cartdata);
-  }, [cartdata]);
 
   if (loading) {
     return (
