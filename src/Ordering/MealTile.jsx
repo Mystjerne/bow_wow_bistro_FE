@@ -29,10 +29,12 @@ export default function MealTile({
   const [openIngredientSubModal, setOpenIngredientSubModal] = useState(false);
 
   const addMealToUserCart = async () => {
-    console.log("Add button clicked!");
     //After adding meal to the cart in the backend, somehow get the data over to the CartModal and have it display the meal name and price.
+    console.log("userid when adding a meal to the cart:", userID);
+    console.log("auth status", isAuthenticated);
+    console.log("accesstoken", localStorage.getItem("accessToken"));
 
-    if (!isAuthenticated) {
+    if (!isAuthenticated || userID === -1) {
       loginWithRedirect();
     } else if (user && isAuthenticated) {
       //User is authenticated. need an access token for the protected axios request.

@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useAuth0 } from "@auth0/auth0-react";
 import NavBar from "../NavBar";
+import { useUser } from "../Context/UserContext";
 
 function OrderPage() {
   //Make a get request to the backend for all the meals.
@@ -12,6 +13,8 @@ function OrderPage() {
   const [AllIngredients, setAllIngredients] = useState([]);
   const { isAuthenticated, getAccessTokenSilently, loginWithRedirect, user } =
     useAuth0();
+
+  const { userID } = useUser();
 
   //getting meal data doesn't need to be protected.
   //Only get meals that have a null user id.
@@ -23,7 +26,6 @@ function OrderPage() {
       .then((response) => {
         const mealdata = response.data;
 
-        console.log("mealdata!!!:", response.data);
         setMealData(mealdata);
       })
       .catch((error) => {
@@ -53,34 +55,22 @@ function OrderPage() {
 
   useEffect(() => {
     const getAllIngredients = async () => {
-      console.log("i am get all ingredients and i am being called.");
-      if (!isAuthenticated) {
-        loginWithRedirect();
-      } else if (user && isAuthenticated) {
-        //User is authenticated. need an access token for the protected axios request.
-        const accessToken = await getAccessTokenSilently({
-          audience: "https://project-4/api",
-          scope:
-            "read:current_user update:current_user_metadata openid profile email",
+      //No longer need to be authenticated to get all ingredients. Will run again on refresh.
+      axios
+        .get(`${import.meta.env.VITE_SOME_BACKEND_INGREDIENTS_URL}`, {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        })
+        .then((response) => {
+          setAllIngredients(response.data);
+        })
+        .catch((error) => {
+          console.error("Error adding meal to cart:", error);
         });
-        //need to post alongside the mealid of the specific meal.
-        axios
-          .get(`${import.meta.env.VITE_SOME_BACKEND_INGREDIENTS_URL}`, {
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          })
-          .then((response) => {
-            console.log("i am response.data", response.data);
-            setAllIngredients(response.data);
-          })
-          .catch((error) => {
-            console.error("Error adding meal to cart:", error);
-          });
-      }
     };
     getAllIngredients();
-  }, [isAuthenticated, user]);
+  }, []);
 
   if (loading) {
     return <CircularProgress />;
@@ -89,11 +79,9 @@ function OrderPage() {
   return (
     <div>
       <NavBar />
-      {isAuthenticated ? (
-        <Grid container spacing={0} justifyContent={"center"}>
-          {allmealtiles}
-        </Grid>
-      ) : null}
+      <Grid container spacing={0} justifyContent={"center"}>
+        {allmealtiles}
+      </Grid>
     </div>
   );
 }

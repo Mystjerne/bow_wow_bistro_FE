@@ -15,15 +15,17 @@ export const UserProvider = ({ children }) => {
   const [userEmail, setUserEmail] = useState(
     localStorage.getItem("userEmail") || ""
   );
-  //get userID from the backend, not from Auth0.
-  const [userID, setUserID] = useState(-1);
+  //get userID from the localstorage if it exists.
+  const [userID, setUserID] = useState(
+    parseInt(localStorage.getItem("userID")) || -1
+  );
 
   //im supposed to keep the accessToken in localstorage. the user details are okay to stay
   const handleUserLogout = () => {
     setUserFirstName("");
     setUserImage("");
     setUserEmail("");
-    setUserID("");
+    setUserID(-1);
 
     localStorage.removeItem("userFirstName");
     localStorage.removeItem("userImage");
@@ -35,17 +37,24 @@ export const UserProvider = ({ children }) => {
     localStorage.setItem("userFirstName", userFirstName);
     localStorage.setItem("userImage", userImage);
     localStorage.setItem("userEmail", userEmail);
-  }, [userFirstName, userImage, userEmail]);
+    localStorage.setItem("userID", userID);
+  }, [userFirstName, userImage, userEmail, userID]);
 
   useEffect(
     () => {
+      const accessToken = localStorage.getItem("accessToken");
+
       const initialising_user = async () => {
         if (isAuthenticated && user) {
+          //the user is authenticated. we now need an accessToken. getAccessTokenSilently has been configured to get it from localstorage.
+
           const accessToken = await getAccessTokenSilently({
             audience: "https://project-4/api",
             scope:
               "read:current_user update:current_user_metadata openid profile email",
           });
+
+          localStorage.setItem("accessToken", accessToken);
 
           //check to see if the user (that exists) is actually in the database.
           const response = await axios.post(
@@ -73,8 +82,6 @@ export const UserProvider = ({ children }) => {
 
             const newUser = newUserReqResponse.data;
 
-            setUserID(newUser.id);
-
             const createCartReq = await axios.post(
               `${import.meta.env.VITE_SOME_BACKEND_CART_URL}`,
               {
@@ -95,6 +102,11 @@ export const UserProvider = ({ children }) => {
             console.log(user_data);
             setUserID(user_data.id);
           }
+        } else {
+          //The user is not authenticated, is not a user or does not have an accesstoken.
+          console.log(
+            "The user is not authenticated, is not a user or does not have an accesstoken."
+          );
         }
       };
 

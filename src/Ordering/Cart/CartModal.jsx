@@ -55,8 +55,6 @@ function CartModal({
   };
 
   const handleDeleteItem = async (meal) => {
-    console.log("i am the meal id in handleDeleteItem", meal.id);
-
     const accessToken = await getAccessTokenSilently({
       audience: "https://project-4/api",
       scope:

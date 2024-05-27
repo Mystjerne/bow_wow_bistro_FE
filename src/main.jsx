@@ -84,6 +84,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
       scope:
         "read:current_user update:current_user_metadata openid profile email",
     }}
+    useRefreshTokens={true}
+    cacheLocation="localstorage"
   >
     <UserProvider>
       <RouterProvider router={router} />

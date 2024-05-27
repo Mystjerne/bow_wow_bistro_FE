@@ -6,7 +6,6 @@ function SubIngredientMenu({
   allIngredients,
   currentCategory,
 }) {
-  console.log(allIngredients, currentCategory);
   var ingredient_buttons = allIngredients
     .filter((ingredient) => ingredient.category === currentCategory)
     .map((ingredient, index) => {
@@ -19,7 +18,6 @@ function SubIngredientMenu({
 
   const handleSubIngredChange = (e) => {
     setSelectedSubIngred(e.target.value);
-    console.log(e.target.value);
   };
 
   return (
