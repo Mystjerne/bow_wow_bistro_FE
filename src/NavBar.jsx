@@ -96,6 +96,7 @@ function NavBar() {
                 marginLeft: 2,
                 fontFamily: "monospace",
                 fontWeight: "bold",
+                color: "black",
               }}
             >
               Bow Wow Bistro
@@ -171,7 +172,7 @@ function NavBar() {
         </MuiLink>
       )}
 
-      <MuiLink
+      {/* <MuiLink
         component={Link}
         to="/history"
         color="#432818"
@@ -190,7 +191,7 @@ function NavBar() {
         }}
       >
         History
-      </MuiLink>
+      </MuiLink> */}
       <MuiLink
         underline="hover"
         variant="button"

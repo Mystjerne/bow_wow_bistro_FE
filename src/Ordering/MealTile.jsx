@@ -43,6 +43,7 @@ export default function MealTile({
         scope:
           "read:current_user update:current_user_metadata openid profile email",
       });
+
       //need to post alongside the mealid of the specific meal.
       axios
         .post(
@@ -83,11 +84,11 @@ export default function MealTile({
           >
             {meal_name}
           </Typography>
-          <Typography variant="body2" color="text.secondary">
+          <Typography fontFamily={"Inknut Antiqua"} color="text.secondary">
             {meal_description}
           </Typography>
           <Typography
-            variant="body2"
+            variant="body1"
             color="text.secondary"
             textAlign={"center"}
           >
