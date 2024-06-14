@@ -1,7 +1,4 @@
-@font-face {
-  font-family: "Inknut Antiqua";
-  src: url("../fonts/InknutAntiqua-Regular.ttf") format("truetype");
-}
+@import url("https://fonts.googleapis.com/css2?family=Inknut+Antiqua:wght@400;700&display=swap");
 
 :root {
   font-family: "Inknut Antiqua", Inter, system-ui, Avenir, Helvetica, Arial,
@@ -25,40 +22,22 @@
   padding-top: 24px;
   padding-bottom: 24px;
   border-radius: 15px;
+  display: flex;
+  flex-direction: column;
 }
 
 .blackText {
   color: black;
 }
 
-.carousel-image {
-  width: 100%;
-  height: auto;
-}
-
-@media (max-width: 600px) {
-  .carousel-image {
-    width: 100%;
-    height: auto;
-  }
-}
-
-@media (max-width: 600px) {
-  .carousel-grid {
-    flex-direction: column;
-  }
-  .red-bar {
+@media (max-width: 1050px) {
+  /* .red-bar {
     background-color: aqua;
-  }
-}
-
-.red-bar {
-  display: flex;
-  flex-wrap: wrap;
+  } */
 }
 
 /* Media query for small screens */
-@media (max-width: 600px) {
+@media (max-width: 1050px) {
   .red-bar {
     flex-direction: column;
   }
@@ -75,71 +54,22 @@
   justify-content: center;
 } */
 
-/*
-button styling needs work (some feedback on hover)
-About Us ->? similar colour, but slightly lighter than the box (#6f1d1b)
-better logo??? 
-increase margin of red box from the border -> increase border raidus
-nav bar that sticks to the top of the screen when scrolling down (but changes into a smaller form?)
--> side slide out thing
-no link blue
-
-*/
-/* #fixedSizeImage {
-  width: 200px;
-  height: 200px;
-} */
-/* 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
+.carousel-image {
+  width: 100%;
+  height: 100%;
 }
-a:hover {
-  color: #535bf2;
+
+.carousel-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  font-family: "Inknut Antiqua", serif;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+.fancyfont {
+  font-family: "Inknut Antiqua", serif;
 }
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
-} */
+/*1050px is when the text of the customer review starts to cut*/

@@ -9,9 +9,9 @@ export default function ReviewTile({
 }) {
   return (
     <Box
-      height={300}
-      width={300}
-      my={4}
+      // height={300}
+      // width={300}
+      // my={4}
       //my is margin
       display="flex"
       flexDirection="column"
@@ -20,9 +20,14 @@ export default function ReviewTile({
       padding={2}
       //p is padding
       sx={{
-        borderRight: borderRight ? "2px solid grey" : "none",
-        borderLeft: borderLeft ? "2px solid grey" : "none",
+        borderRight: {
+          xs: "none",
+          md: borderRight ? "2px solid grey" : "none",
+        },
+        borderLeft: { xs: "none", md: borderLeft ? "2px solid grey" : "none" },
       }}
+
+      //
     >
       <img
         src={reviewer_image_src}

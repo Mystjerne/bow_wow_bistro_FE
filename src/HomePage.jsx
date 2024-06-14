@@ -21,69 +21,73 @@ function HomePage() {
       {/* <ResponsiveAppBar /> */}
       <NavBar />
       <HorizontalScrollingCarousel />
-
       <Box className="red-bar">
         <Container>
           <Typography variant="h3" gutterBottom textAlign={"center"}>
             About Us
           </Typography>
-          <Typography variant="body1" textAlign={"center"}>
+          <p textAlign={"center"}>
             Welcome to our dog-friendly restaurant in Singapore, where every
             dish reflects our love for dogs. Inspired by our furry friend
             Darcie, we craft wholesome meals tailored to their unique needs.
             Join us in celebrating the joy of canine companionship and good
             food, one wagging tail at a time. Welcome to our dog-loving
             community!
-          </Typography>
+          </p>
         </Container>
       </Box>
 
-      <Box margin={4}>
+      <Box sx={{ margin: 4 }}>
         <Container>
-          <Grid container className="blackText">
-            <Grid item xs={4} textAlign={"center"}>
-              <PetsRoundedIcon />
-            </Grid>
-            <Grid item xs={4} textAlign={"center"}>
-              <SetMealRoundedIcon />
-            </Grid>
-            <Grid item xs={4} textAlign={"center"}>
-              <EggRoundedIcon />
-            </Grid>
-          </Grid>
-          <Grid container className="blackText">
-            <Grid item xs={4} textAlign={"center"}>
-              Treat Your Best Friend
-            </Grid>
-            <Grid item xs={4} textAlign={"center"}>
-              Allergy Friendly
-            </Grid>
-            <Grid item xs={4} textAlign={"center"}>
-              All Natural
-            </Grid>
-          </Grid>
-
           <Grid container className="blackText">
             <Grid
               item
-              xs={4}
+              xs={12}
+              md={4}
+              sx={{
+                margin: { xs: 2, md: 0 },
+              }}
               textAlign={"center"}
-              // style={{ whiteSpace: "normal" }}
             >
+              <PetsRoundedIcon />
+              <br />
+              <h4>Treat Your Best Friend</h4>
               Your pup will savor every delicious bite of our gourmet dog food!
             </Grid>
-            <Grid item xs={4} textAlign={"center"}>
+
+            <Grid
+              item
+              xs={12}
+              md={4}
+              sx={{
+                margin: { xs: 2, md: 0 },
+              }}
+              textAlign={"center"}
+            >
+              <SetMealRoundedIcon />
+              <br />
+              <h4>Allergy Friendly</h4>
               Don't like an ingredient? Want to switch an ingredient for
               another? We have your back.
             </Grid>
-            <Grid item xs={4} textAlign={"center"}>
+            <Grid
+              item
+              xs={12}
+              md={4}
+              textAlign={"center"}
+              sx={{
+                margin: { xs: 2, md: 0 },
+              }}
+            >
+              <EggRoundedIcon />
+              <br />
+              <h4>All Natural</h4>
               Crafted with only the finest all-natural ingredients, ensuring
               your furry friend enjoys wholesome nutrition with every bite.
             </Grid>
           </Grid>
         </Container>
       </Box>
-
       <Box
         className="red-bar"
         sx={{ flexDirection: { xs: "column", md: "flex" } }}
@@ -101,31 +105,52 @@ function HomePage() {
             alignItems="center"
             // Adjust the spacing between grid items
           >
-            <Grid item xs={4}>
+            <Grid
+              item
+              xs={12}
+              md={4}
+              sx={{
+                margin: { xs: 2, md: 0 },
+              }}
+            >
               <ReviewTile
                 reviewer_name="Benjamin, 3.5 years old"
                 review_text="mounch mounch mounch"
                 reviewer_image_src={"../public/Benjamin.jpg"}
-                borderRight={false}
+                borderRight={true}
                 borderLeft={false}
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid
+              item
+              xs={12}
+              md={4}
+              sx={{
+                margin: { xs: 2, md: 0 },
+              }}
+            >
               <ReviewTile
                 reviewer_name="Henry, 3 years old"
                 review_text="WOOF WOOF WOOF GRR WOOF WOOF WOOF"
                 reviewer_image_src={"../public/Henry.jpg"}
-                borderRight={true}
-                borderLeft={true}
+                borderRight={false}
+                borderLeft={false}
               />
             </Grid>
-            <Grid item xs={4}>
+            <Grid
+              item
+              xs={12}
+              md={4}
+              sx={{
+                margin: { xs: 2, md: 0 },
+              }}
+            >
               <ReviewTile
                 reviewer_name="Yuki, 3 months old"
                 review_text="Bow Wow offers the most delightful foods I've ever sampled in my life!"
                 reviewer_image_src={"../public/Yuki.jpg"}
                 borderRight={false}
-                borderLeft={false}
+                borderLeft={true}
               />
             </Grid>
           </Grid>
@@ -138,18 +163,7 @@ function HomePage() {
             <Grid item xs={12} textAlign={"center"}>
               <PetsRoundedIcon />
             </Grid>
-            {/* <Grid item xs={6} textAlign={"center"}>
-              <SetMealRoundedIcon />
-            </Grid> */}
           </Grid>
-          {/* <Grid container className="blackText">
-            <Grid item xs={6} textAlign={"center"}>
-              Treat Your Best Friend
-            </Grid>
-            <Grid item xs={6} textAlign={"center"}>
-              Allergy Friendly
-            </Grid>
-          </Grid> */}
         </Container>
       </Box>
     </div>
