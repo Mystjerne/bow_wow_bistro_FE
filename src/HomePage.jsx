@@ -116,7 +116,7 @@ function HomePage() {
               <ReviewTile
                 reviewer_name="Benjamin, 3.5 years old"
                 review_text="mounch mounch mounch"
-                reviewer_image_src={"../public/Benjamin.jpg"}
+                reviewer_image_src={"/Benjamin.jpg"}
                 borderRight={true}
                 borderLeft={false}
               />
@@ -132,7 +132,7 @@ function HomePage() {
               <ReviewTile
                 reviewer_name="Henry, 3 years old"
                 review_text="WOOF WOOF WOOF GRR WOOF WOOF WOOF"
-                reviewer_image_src={"../public/Henry.jpg"}
+                reviewer_image_src={"/Henry.jpg"}
                 borderRight={false}
                 borderLeft={false}
               />
@@ -148,7 +148,7 @@ function HomePage() {
               <ReviewTile
                 reviewer_name="Yuki, 3 months old"
                 review_text="Bow Wow offers the most delightful foods I've ever sampled in my life!"
-                reviewer_image_src={"../public/Yuki.jpg"}
+                reviewer_image_src={"/Yuki.jpg"}
                 borderRight={false}
                 borderLeft={true}
               />
