@@ -65,12 +65,12 @@ const router = createBrowserRouter([
   {
     path: "/stripe/success",
     element: <StripeSuccessPage />,
-    // children: [
-    //   {
-    //     path: "/stripe/failure",
-    //     element: <NavBar />,
-    //   },
-    // ],
+    children: [
+      {
+        path: "/stripe/success",
+        element: <NavBar />,
+      },
+    ],
   },
 ]);
 
