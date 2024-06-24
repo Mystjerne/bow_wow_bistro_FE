@@ -53,21 +53,21 @@ const router = createBrowserRouter([
     ],
   },
   {
-    path: "/stripe/failure",
-    element: <StripeFailurePage />,
-    children: [
-      {
-        path: "/stripe/failure",
-        element: <NavBar />,
-      },
-    ],
-  },
-  {
     path: "/stripe/success",
     element: <StripeSuccessPage />,
     children: [
       {
         path: "/stripe/success",
+        element: <NavBar />,
+      },
+    ],
+  },
+  {
+    path: "/stripe/failure",
+    element: <StripeFailurePage />,
+    children: [
+      {
+        path: "/stripe/failure",
         element: <NavBar />,
       },
     ],
