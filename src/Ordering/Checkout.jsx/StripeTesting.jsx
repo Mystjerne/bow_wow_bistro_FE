@@ -74,11 +74,17 @@ function StripeTesting() {
 
   if (loading) {
     return (
-      <>
-        <h1>Redirecting...</h1>
-        <br />
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <p>Redirecting...</p>
         <CircularProgress />
-      </>
+      </div>
     );
   }
 
