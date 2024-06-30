@@ -54,9 +54,19 @@ function PurchaseHistory() {
   }, [isAuthenticated, user, userID]);
 
   if (loading) {
-    return <CircularProgress />;
+    return (
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+        }}
+      >
+        <CircularProgress />
+      </div>
+    );
   }
-
   if (error) {
     return <div>Error: {error}</div>;
   }
