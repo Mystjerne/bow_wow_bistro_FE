@@ -1,13 +1,10 @@
-# Rocket Academy Coding Bootcamp: Project 3 - Full Stack Application
-
-https://bc.rocketacademy.co/3-backend/3.p-full-stack-app-express
+# Rocket Academy Coding Bootcamp: Project 4 - Full Stack Application
 
 ## Available Scripts
 
 This project was created using with Vitejs. In the project directory, please run the following commands:
 
 `npm install`
-
 `npm run dev`
 
 The second command will run the app To see the rendered output please open http://localhost:5173 in the browser of your choice, EG: Google Chrome.
