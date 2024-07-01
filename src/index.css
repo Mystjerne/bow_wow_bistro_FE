@@ -47,13 +47,6 @@
   }
 }
 
-/* .carousel-grid {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-} */
-
 body {
   font-family: "Inknut Antiqua", serif;
 }
@@ -72,4 +65,9 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.carousel-grid {
+  min-width: fit-content;
+  min-height: fit-content;
 }
